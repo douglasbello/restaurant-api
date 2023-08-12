@@ -15,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 @Entity
 @Table(name = "food")
@@ -27,6 +28,8 @@ public class Food {
     private BigDecimal price;
     private EnumFoodSize size;
     private EnumFoodType type;
+
+    @Transient
     private PriceCalculator priceCalculator;
 
     public Food() {}

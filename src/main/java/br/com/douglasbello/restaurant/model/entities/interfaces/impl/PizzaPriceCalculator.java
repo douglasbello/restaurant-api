@@ -2,9 +2,12 @@ package br.com.douglasbello.restaurant.model.entities.interfaces.impl;
 
 import java.math.BigDecimal;
 
+import org.springframework.stereotype.Service;
+
 import br.com.douglasbello.restaurant.model.entities.interfaces.PriceCalculator;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 
+@Service
 public class PizzaPriceCalculator implements PriceCalculator {
 
     @Override
