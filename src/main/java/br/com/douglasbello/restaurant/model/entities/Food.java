@@ -3,6 +3,11 @@ package br.com.douglasbello.restaurant.model.entities;
 import java.math.BigDecimal;
 import java.util.UUID;
 
+import br.com.douglasbello.restaurant.model.entities.interfaces.PriceCalculator;
+import br.com.douglasbello.restaurant.model.entities.interfaces.impl.BurguerPriceCalculator;
+import br.com.douglasbello.restaurant.model.entities.interfaces.impl.DessertPriceCalculator;
+import br.com.douglasbello.restaurant.model.entities.interfaces.impl.HotdogPriceCalculator;
+import br.com.douglasbello.restaurant.model.entities.interfaces.impl.PizzaPriceCalculator;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
 import jakarta.persistence.Entity;
@@ -22,6 +27,7 @@ public class Food {
     private BigDecimal price;
     private EnumFoodSize size;
     private EnumFoodType type;
+    private PriceCalculator priceCalculator;
 
     public Food() {}
 
@@ -31,6 +37,8 @@ public class Food {
         this.price = price;
         this.size = size;
         this.type = type;
+
+        setPriceCalculator();
         calculatePrice();
     }
 
@@ -73,39 +81,26 @@ public class Food {
 
     public void setType(EnumFoodType type) {
         this.type = type;
+        setPriceCalculator();
+    }
+
+    private void setPriceCalculator() {
+        if (type == EnumFoodType.BURGUER) {
+            this.priceCalculator = new BurguerPriceCalculator();
+        } 
+        if (type == EnumFoodType.PIZZA) {
+            this.priceCalculator = new PizzaPriceCalculator();
+        } 
+        if (type == EnumFoodType.HOTDOG) {
+            this.priceCalculator = new HotdogPriceCalculator();
+        }
+        if (type == EnumFoodType.DESSERT) {
+            this.priceCalculator = new DessertPriceCalculator();
+        }
     }
 
     private void calculatePrice() {
-        if (this.type == EnumFoodType.BURGUER) {
-
-            if (this.size == EnumFoodSize.MEDIUM) {
-                this.price = price.add(new BigDecimal("4.99"));
-            }
-
-            if (this.size == EnumFoodSize.LARGE) {
-                this.price = price.add(new BigDecimal("9.99"));
-            }
-        }
-
-        else if (this.type == EnumFoodType.PIZZA) {
-            if (this.size == EnumFoodSize.MEDIUM) {
-                this.price = price.add(new BigDecimal("11.99"));
-            }
-
-            if (this.size == EnumFoodSize.LARGE) {
-                this.price = price.add(new BigDecimal("20.99"));
-            }
-        }
-
-        else if (this.type == EnumFoodType.HOTDOG) {
-            if (this.size == EnumFoodSize.MEDIUM) {
-                this.price = price.add(new BigDecimal("2.99"));
-            }
-
-            if (this.size == EnumFoodSize.LARGE) {
-                this.price = price.add(new BigDecimal("6.99"));
-            }
-        }
+        this.price = priceCalculator.calculatePrice(size);
     }
 
     @Override
