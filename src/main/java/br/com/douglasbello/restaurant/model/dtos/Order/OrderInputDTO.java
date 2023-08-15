@@ -1,11 +1,10 @@
-package br.com.douglasbello.restaurant.model.dtos.order;
+package br.com.douglasbello.restaurant.model.dtos.Order;
 
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemInputDTO;
 import br.com.douglasbello.restaurant.model.enums.EnumPayment;
 import jakarta.validation.constraints.Size;
 
-import java.time.Instant;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -10,12 +10,7 @@ import br.com.douglasbello.restaurant.model.entities.interfaces.impl.HotdogPrice
 import br.com.douglasbello.restaurant.model.entities.interfaces.impl.PizzaPriceCalculator;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "FOODS")
@@ -25,9 +20,11 @@ public class Food {
     private UUID id;
     private String name;
     private String description;
-    private BigDecimal price;
+    @Enumerated(EnumType.STRING)
     private EnumFoodSize size;
+    @Enumerated(EnumType.STRING)
     private EnumFoodType type;
+    private BigDecimal price;
 
     @Transient
     private PriceCalculator priceCalculator;
@@ -43,6 +40,14 @@ public class Food {
 
         setPriceCalculator();
         calculatePrice();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -75,7 +80,7 @@ public class Food {
 
     public void setSize(EnumFoodSize size) {
         this.size = size;
-        calculatePrice();
+        setPriceCalculator();
     }
 
     public EnumFoodType getType() {
@@ -85,6 +90,7 @@ public class Food {
     public void setType(EnumFoodType type) {
         this.type = type;
         setPriceCalculator();
+        calculatePrice();
     }
 
     private void setPriceCalculator() {
@@ -103,7 +109,7 @@ public class Food {
     }
 
     private void calculatePrice() {
-        this.price = priceCalculator.calculatePrice(size);
+        this.price = price.add(priceCalculator.calculatePrice(size));
     }
 
     @Override

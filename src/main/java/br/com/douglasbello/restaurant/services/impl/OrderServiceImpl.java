@@ -1,7 +1,7 @@
 package br.com.douglasbello.restaurant.services.impl;
 
 import br.com.douglasbello.restaurant.model.dtos.Mapper;
-import br.com.douglasbello.restaurant.model.dtos.order.OrderInputDTO;
+import br.com.douglasbello.restaurant.model.dtos.Order.OrderInputDTO;
 import br.com.douglasbello.restaurant.model.entities.Order;
 import br.com.douglasbello.restaurant.repository.OrderRepository;
 import br.com.douglasbello.restaurant.services.AbstractService;

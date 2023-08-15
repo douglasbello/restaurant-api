@@ -9,12 +9,7 @@ import br.com.douglasbello.restaurant.model.entities.interfaces.impl.GuaranaPric
 import br.com.douglasbello.restaurant.model.entities.interfaces.impl.PepsiPriceCalculator;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkSize;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "DRINKS")
@@ -23,9 +18,11 @@ public class Drink {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String name;
-    private BigDecimal price;
+    @Enumerated(EnumType.STRING)
     private EnumDrinkSize size;
+    @Enumerated(EnumType.STRING)
     private EnumDrinkType sodaBrand;
+    private BigDecimal price;
 
     @Transient
     private DrinkPriceCalculator priceCalculator;
@@ -40,6 +37,14 @@ public class Drink {
 
         setPriceCalculator();
         calculatePrice();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {

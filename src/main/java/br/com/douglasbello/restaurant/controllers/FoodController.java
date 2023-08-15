@@ -5,6 +5,7 @@ import br.com.douglasbello.restaurant.services.impl.FoodServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 

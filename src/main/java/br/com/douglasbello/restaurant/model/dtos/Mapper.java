@@ -2,7 +2,7 @@ package br.com.douglasbello.restaurant.model.dtos;
 
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemInputDTO;
-import br.com.douglasbello.restaurant.model.dtos.order.OrderInputDTO;
+import br.com.douglasbello.restaurant.model.dtos.Order.OrderInputDTO;
 import br.com.douglasbello.restaurant.model.entities.*;
 import br.com.douglasbello.restaurant.services.impl.DrinkServiceImpl;
 import br.com.douglasbello.restaurant.services.impl.FoodServiceImpl;
