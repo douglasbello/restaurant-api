@@ -24,12 +24,12 @@ public class AdminController {
     }
 
     @PostMapping
-    public ResponseEntity<?> save(@RequestBody Admin admin) {
+    public ResponseEntity<Admin> save(@RequestBody Admin admin) {
         return ResponseEntity.ok().body(service.save(admin));
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<?> deleteById(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
         service.delete(id);
         return ResponseEntity.noContent().build();
     }
