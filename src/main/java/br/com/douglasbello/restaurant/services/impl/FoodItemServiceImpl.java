@@ -5,13 +5,12 @@ import br.com.douglasbello.restaurant.model.dtos.Mapper;
 import br.com.douglasbello.restaurant.model.entities.FoodItem;
 import br.com.douglasbello.restaurant.repository.FoodItemRepository;
 import br.com.douglasbello.restaurant.services.AbstractService;
-import br.com.douglasbello.restaurant.services.CommonService;
 import br.com.douglasbello.restaurant.services.FoodItemService;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.UUID;
 
-public class FoodItemServiceImpl extends AbstractService<FoodItem> implements CommonService<FoodItem>, FoodItemService {
+public class FoodItemServiceImpl extends AbstractService<FoodItem> implements FoodItemService {
 
     private final FoodItemRepository repository;
 

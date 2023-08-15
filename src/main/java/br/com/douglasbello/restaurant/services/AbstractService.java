@@ -24,7 +24,7 @@ public abstract class AbstractService<T> implements CommonService<T> {
         return getRepository().save(obj);
     }
 
-    /* the method updateData() is not implemented here, because each class has different attributes. */
+    /* the method updateData() is not implemented in this class, because each class has different attributes and different updateData implementations. */
     @Override
     public T update(UUID oldObjectId, T newObj) {
         T oldObject = findById(oldObjectId);

@@ -2,14 +2,15 @@ package br.com.douglasbello.restaurant.model.dtos;
 
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemInputDTO;
-import br.com.douglasbello.restaurant.model.entities.Drink;
-import br.com.douglasbello.restaurant.model.entities.DrinkItem;
-import br.com.douglasbello.restaurant.model.entities.Food;
-import br.com.douglasbello.restaurant.model.entities.FoodItem;
+import br.com.douglasbello.restaurant.model.dtos.order.OrderInputDTO;
+import br.com.douglasbello.restaurant.model.entities.*;
 import br.com.douglasbello.restaurant.services.impl.DrinkServiceImpl;
 import br.com.douglasbello.restaurant.services.impl.FoodServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Component
 public class Mapper {
@@ -36,5 +37,25 @@ public class Mapper {
         data.setFood(food);
         data.setPriceCalculatedByQuantity();
         return data;
+    }
+
+    public static Order dtoToOrder(OrderInputDTO dto) {
+        Order order = new Order();
+        order.setCep(dto.getCep());
+        order.setHouseNumber(dto.getHouseNumber());
+
+        List<FoodItem> foodItems = dto.getFoodItemInputDTOS().stream().map(Mapper::dtoToFoodItem).collect(Collectors.toList());
+        foodItems.forEach(item -> {
+            item.setOrder(order);
+            order.getFoodItems().add(item);
+        });
+
+        List<DrinkItem> drinkItems = dto.getDrinkItemInputDTOS().stream().map(Mapper::dtoToDrinkItem).collect(Collectors.toList());
+        drinkItems.forEach(item -> {
+            item.setOrder(order);
+            order.getDrinkItems().add(item);
+        });
+
+        return order;
     }
 }

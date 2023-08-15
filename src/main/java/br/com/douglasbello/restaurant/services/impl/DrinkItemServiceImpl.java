@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
-public class DrinkItemServiceImpl extends AbstractService<DrinkItem> implements CommonService<DrinkItem>, DrinkItemService {
+public class DrinkItemServiceImpl extends AbstractService<DrinkItem> implements DrinkItemService {
 
     private final DrinkItemRepository repository;
 
