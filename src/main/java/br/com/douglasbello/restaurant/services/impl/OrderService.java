@@ -31,4 +31,9 @@ public class OrderService implements CommonService<Order> {
     public void delete(UUID id) {
         
     }
+
+    @Override
+    public void updateData(Order old, Order newObj) {
+
+    }
 }

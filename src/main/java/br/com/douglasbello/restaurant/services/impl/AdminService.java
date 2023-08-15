@@ -7,7 +7,9 @@ import br.com.douglasbello.restaurant.model.entities.Admin;
 import br.com.douglasbello.restaurant.repository.AdminRepository;
 import br.com.douglasbello.restaurant.services.CommonService;
 import jakarta.persistence.EntityNotFoundException;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminService implements CommonService<Admin> {
     private final AdminRepository repository;
 
@@ -42,7 +44,6 @@ public class AdminService implements CommonService<Admin> {
             updateData(oldObject, newObj);
             return repository.save(oldObject);
         } catch (EntityNotFoundException ex) {
-            ex.printStackTrace();
             throw new RuntimeException();
         } 
     }
@@ -50,7 +51,7 @@ public class AdminService implements CommonService<Admin> {
     @Override
     public void updateData(Admin old, Admin newObj) {
         old.setUsername(newObj.getUsername());
-        old.setPassword(old.getPassword());
+        old.setPassword(newObj.getPassword());
     }
 
 }

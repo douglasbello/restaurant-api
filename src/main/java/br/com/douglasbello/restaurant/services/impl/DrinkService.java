@@ -28,6 +28,11 @@ public class DrinkService implements CommonService<Drink> {
     }
 
     @Override
+    public void updateData(Drink old, Drink newObj) {
+
+    }
+
+    @Override
     public Drink update(UUID oldObjectId, Drink newObj) {
         return null;
     }

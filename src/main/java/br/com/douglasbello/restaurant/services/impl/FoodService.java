@@ -29,6 +29,11 @@ public class FoodService implements CommonService<Food> {
     }
 
     @Override
+    public void updateData(Food old, Food newObj) {
+
+    }
+
+    @Override
     public Food update(UUID oldObjectId, Food newObj) {
         return null;
     }
