@@ -56,6 +56,7 @@ public class Drink {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+        calculatePrice();
     }
 
     public EnumDrinkSize getSize() {

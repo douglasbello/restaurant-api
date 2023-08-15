@@ -10,7 +10,9 @@ import br.com.douglasbello.restaurant.repository.FoodRepository;
 import br.com.douglasbello.restaurant.services.AbstractService;
 import br.com.douglasbello.restaurant.services.FoodService;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
+@Service
 public class FoodServiceImpl extends AbstractService<Food> implements FoodService {
 
     private final FoodRepository repository;

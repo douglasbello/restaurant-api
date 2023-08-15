@@ -33,6 +33,15 @@ public class FoodItem {
         id.setOrder(order);;
     }
 
+    @JsonIgnore
+    public Food getFood() {
+        return id.getFood();
+    }
+
+    public void setFood(Food food) {
+        id.setFood(food);
+    }
+
     public Integer getQuantity() {
         return quantity;
     }
@@ -47,6 +56,10 @@ public class FoodItem {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
+    }
+
+    public void setPriceCalculatedByQuantity() {
+        price = id.getFood().getPrice().multiply(BigDecimal.valueOf(quantity));
     }
 
     @Override

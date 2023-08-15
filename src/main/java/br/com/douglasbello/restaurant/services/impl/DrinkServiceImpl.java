@@ -7,10 +7,12 @@ import br.com.douglasbello.restaurant.repository.DrinkRepository;
 import br.com.douglasbello.restaurant.services.AbstractService;
 import br.com.douglasbello.restaurant.services.DrinkService;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class DrinkServiceImpl extends AbstractService<Drink> implements DrinkService {
 
     private final DrinkRepository repository;

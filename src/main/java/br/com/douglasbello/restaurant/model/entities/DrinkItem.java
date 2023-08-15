@@ -33,6 +33,15 @@ public class DrinkItem {
         id.setOrder(order);
     }
 
+    @JsonIgnore
+    public Drink getDrink() {
+        return id.getDrink();
+    }
+
+    public void setDrink(Drink drink) {
+        id.setDrink(drink);
+    }
+
     public Integer getQuantity() {
         return quantity;
     }
@@ -45,9 +54,11 @@ public class DrinkItem {
         return price;
     }
 
+    public void setPriceCalculatedByQuantity() {
+        price = id.getDrink().getPrice().multiply(BigDecimal.valueOf(quantity));
+    }
+
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
-
-
 }
