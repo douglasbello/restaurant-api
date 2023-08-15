@@ -10,7 +10,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 
 @Entity
-@Table(name = "food_item")
+@Table(name = "FOOD_ITEMS")
 public class FoodItem {
     @EmbeddedId
     private FoodItemPK id = new FoodItemPK();

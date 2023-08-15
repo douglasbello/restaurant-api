@@ -10,4 +10,5 @@ public interface CommonService<T> {
     T save(T object);
     T update(UUID oldObjectId, T newObj);
     void delete(UUID id);
+    void updateData(T old, T newObj);
 }

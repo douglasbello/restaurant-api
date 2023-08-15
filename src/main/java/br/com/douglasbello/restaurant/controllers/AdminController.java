@@ -1,7 +1,7 @@
 package br.com.douglasbello.restaurant.controllers;
 
 import br.com.douglasbello.restaurant.model.entities.Admin;
-import br.com.douglasbello.restaurant.services.impl.AdminService;
+import br.com.douglasbello.restaurant.services.impl.AdminServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,9 +11,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "/admins")
 public class AdminController {
-    private final AdminService service;
+    private final AdminServiceImpl service;
 
-    public AdminController(AdminService service) {
+    public AdminController(AdminServiceImpl service) {
         this.service = service;
     }
 

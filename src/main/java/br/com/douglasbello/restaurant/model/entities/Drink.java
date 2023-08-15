@@ -17,7 +17,7 @@ import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 
 @Entity
-@Table(name = "drink")
+@Table(name = "DRINKS")
 public class Drink {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
