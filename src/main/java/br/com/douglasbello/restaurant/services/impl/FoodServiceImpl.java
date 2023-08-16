@@ -1,8 +1,10 @@
 package br.com.douglasbello.restaurant.services.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
+import br.com.douglasbello.restaurant.model.dtos.Food.FoodInputDTO;
 import br.com.douglasbello.restaurant.model.entities.Food;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
@@ -26,11 +28,13 @@ public class FoodServiceImpl extends AbstractService<Food> implements FoodServic
         return repository;
     }
 
-    @Override
-    public void updateData(Food old, Food newObj) {
+    public void updateDataUsingDTO(Food old, FoodInputDTO newObj) {
         old.setName(newObj.getName());
         old.setDescription(newObj.getDescription());
+        old.setPrice(BigDecimal.ZERO);
+        System.out.println(old.getPrice());
         old.setPrice(newObj.getPrice());
+        System.out.println(old.getPrice());
         old.setSize(newObj.getSize());
         old.setType(newObj.getType());
     }
@@ -58,5 +62,16 @@ public class FoodServiceImpl extends AbstractService<Food> implements FoodServic
     @Override
     public List<Food> findAllBySize(EnumFoodSize size) {
         return repository.findAllBySize(size);
+    }
+
+    @Override
+    public void updateData(Food old, Food newObj) {
+
+    }
+
+    public Food updateUsingDTO(UUID id, FoodInputDTO dto) {
+        Food oldObject  = findById(id);
+        updateDataUsingDTO(oldObject, dto);
+        return getRepository().save(oldObject);
     }
 }

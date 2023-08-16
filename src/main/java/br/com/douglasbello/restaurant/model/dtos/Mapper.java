@@ -1,6 +1,7 @@
 package br.com.douglasbello.restaurant.model.dtos;
 
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
+import br.com.douglasbello.restaurant.model.dtos.Food.FoodInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.Order.OrderInputDTO;
 import br.com.douglasbello.restaurant.model.entities.*;
@@ -37,6 +38,16 @@ public class Mapper {
         data.setFood(food);
         data.setPriceCalculatedByQuantity();
         return data;
+    }
+
+    public static Food dtoToFood(FoodInputDTO dto) {
+        Food food = new Food();
+        food.setName(dto.getName());
+        food.setDescription(dto.getDescription());
+        food.setPrice(dto.getPrice());
+        food.setSize(dto.getSize());
+        food.setType(dto.getType());
+        return food;
     }
 
     public static Order dtoToOrder(OrderInputDTO dto) {

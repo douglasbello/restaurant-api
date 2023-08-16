@@ -16,9 +16,8 @@ public class BurguerPriceCalculator implements PriceCalculator {
             return new BigDecimal("08.99");
         }
         if (size == EnumFoodSize.LARGE) {
-            return new BigDecimal("13.99");
+            return new BigDecimal("21.99");
         }
         return BigDecimal.ZERO;
     }
-
 }

@@ -1,29 +1,37 @@
 package br.com.douglasbello.restaurant.model.dtos.Food;
 
+import br.com.douglasbello.restaurant.model.entities.Food;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
-import jakarta.validation.constraints.NotBlank;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
-public class FoodInputDTO {
-    @NotBlank(message = "Name cannot be blank or null.")
+public class FoodResponseDTO {
+    private UUID id;
     private String name;
-    @NotBlank(message = "Description cannot be blank or null.")
     private String description;
-    @NotBlank(message = "Price cannot be blank or null.")
     private BigDecimal price;
     private EnumFoodSize size;
     private EnumFoodType type;
 
-    public FoodInputDTO () {}
+    public FoodResponseDTO() {}
 
-    public FoodInputDTO(String name, String description, EnumFoodSize size, EnumFoodType type, BigDecimal price) {
-        this.name = name;
-        this.description = description;
-        this.size = size;
-        this.type = type;
-        this.price = price;
+    public FoodResponseDTO(Food food) {
+        id = food.getId();
+        name = food.getName();
+        description = food.getDescription();
+        price = food.getPrice();
+        size = food.getSize();
+        type = food.getType();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -42,6 +50,14 @@ public class FoodInputDTO {
         this.description = description;
     }
 
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
+    }
+
     public EnumFoodSize getSize() {
         return size;
     }
@@ -56,13 +72,5 @@ public class FoodInputDTO {
 
     public void setType(EnumFoodType type) {
         this.type = type;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }
