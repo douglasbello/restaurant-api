@@ -1,29 +1,29 @@
-package br.com.douglasbello.restaurant.model.dtos.FoodItem;
+package br.com.douglasbello.restaurant.model.dtos.DrinkItem;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
 
-public class FoodItemInputDTO {
+public class DrinkItemDTO {
     @NotBlank(message = "The drinkId field cannot be null or blank.")
-    private UUID foodId;
+    private UUID drinkId;
     @Positive(message = "Quantity field must be a positive integer.")
     private Integer quantity;
 
-    public FoodItemInputDTO() {}
+    public DrinkItemDTO() {}
 
-    public FoodItemInputDTO(UUID foodId, Integer quantity) {
-        this.foodId = foodId;
+    public DrinkItemDTO(UUID drinkId, Integer quantity) {
+        this.drinkId = drinkId;
         this.quantity = quantity;
     }
 
-    public UUID getFoodId() {
-        return foodId;
+    public UUID getDrinkId() {
+        return drinkId;
     }
 
-    public void setFoodId(UUID foodId) {
-        this.foodId = foodId;
+    public void setDrinkId(UUID drinkId) {
+        this.drinkId = drinkId;
     }
 
     public Integer getQuantity() {

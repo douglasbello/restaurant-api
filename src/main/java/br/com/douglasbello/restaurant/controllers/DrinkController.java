@@ -19,9 +19,11 @@ import java.util.stream.Collectors;
 @RequestMapping(value = "/drink")
 public class DrinkController {
     private final DrinkServiceImpl service;
+    private final Mapper mapper;
 
-    public DrinkController(DrinkServiceImpl service) {
+    public DrinkController(DrinkServiceImpl service, Mapper mapper) {
         this.service = service;
+        this.mapper = mapper;
     }
 
     @GetMapping
@@ -40,7 +42,7 @@ public class DrinkController {
 
     @PostMapping
     public ResponseEntity<DrinkResponseDTO> save(@RequestBody DrinkInputDTO dto) {
-        Drink data = Mapper.dtoToDrink(dto);
+        Drink data = mapper.dtoToDrink(dto);
         DrinkResponseDTO response = new DrinkResponseDTO(service.save(data));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }

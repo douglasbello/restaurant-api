@@ -1,7 +1,7 @@
 package br.com.douglasbello.restaurant.model.dtos.Order;
 
-import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
-import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemInputDTO;
+import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemDTO;
+import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemDTO;
 import br.com.douglasbello.restaurant.model.enums.EnumPayment;
 import jakarta.validation.constraints.Size;
 
@@ -12,8 +12,8 @@ public class OrderInputDTO {
     @Size(min = 8, max = 8, message = "The cep field size length must be 8 characters.")
     private String cep;
     private String houseNumber;
-    private Set<FoodItemInputDTO> foodItems = new HashSet<>();
-    private Set<DrinkItemInputDTO> drinkItems = new HashSet<>();
+    private Set<FoodItemDTO> foodItems = new HashSet<>();
+    private Set<DrinkItemDTO> drinkItems = new HashSet<>();
     private EnumPayment payment;
 
     public OrderInputDTO() {}
@@ -48,11 +48,11 @@ public class OrderInputDTO {
         this.payment = payment;
     }
 
-    public Set<FoodItemInputDTO> getFoodItems() {
+    public Set<FoodItemDTO> getFoodItems() {
         return foodItems;
     }
 
-    public Set<DrinkItemInputDTO> getDrinkItems() {
+    public Set<DrinkItemDTO> getDrinkItems() {
         return drinkItems;
     }
 }

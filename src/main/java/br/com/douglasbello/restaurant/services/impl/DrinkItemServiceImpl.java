@@ -1,16 +1,14 @@
 package br.com.douglasbello.restaurant.services.impl;
 
-import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
+import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemDTO;
 import br.com.douglasbello.restaurant.model.dtos.Mapper;
 import br.com.douglasbello.restaurant.model.entities.DrinkItem;
 import br.com.douglasbello.restaurant.repository.DrinkItemRepository;
 import br.com.douglasbello.restaurant.services.AbstractService;
-import br.com.douglasbello.restaurant.services.CommonService;
 import br.com.douglasbello.restaurant.services.DrinkItemService;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -18,8 +16,11 @@ public class DrinkItemServiceImpl extends AbstractService<DrinkItem> implements 
 
     private final DrinkItemRepository repository;
 
-    public DrinkItemServiceImpl(DrinkItemRepository repository) {
+    private final Mapper mapper;
+
+    public DrinkItemServiceImpl(DrinkItemRepository repository, Mapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -28,8 +29,8 @@ public class DrinkItemServiceImpl extends AbstractService<DrinkItem> implements 
     }
 
     @Override
-    public DrinkItem createDrinkItem(DrinkItemInputDTO data) {
-        DrinkItem item = Mapper.dtoToDrinkItem(data);
+    public DrinkItem createDrinkItem(DrinkItemDTO data) {
+        DrinkItem item = mapper.dtoToDrinkItem(data);
         return item;
     }
 

@@ -1,6 +1,9 @@
 package br.com.douglasbello.restaurant.model.entities;
 
+import java.math.BigDecimal;
 import java.time.Instant;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
@@ -23,13 +26,14 @@ public class Order {
     private UUID id;
     private String cep;
     private String houseNumber;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss'Z'", timezone = "GMT")
+    @JsonFormat(shape = JsonFormat.Shape.STRING)
     private Instant moment;
     @OneToMany(mappedBy = "id.order")
     private Set<FoodItem> foodItems = new HashSet<>();
     @OneToMany(mappedBy = "id.order")
     private Set<DrinkItem> drinkItems = new HashSet<>();
     private EnumPayment payment;
+    private BigDecimal price = BigDecimal.ZERO;
 
     public Order() {}
 
@@ -44,6 +48,12 @@ public class Order {
 
     public Instant getMoment() {
         return moment;
+    }
+
+    public String getFormattedMoment() {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss")
+                .withZone(ZoneId.of("America/Sao_Paulo"));
+        return formatter.format(moment);
     }
 
     public Set<FoodItem> getFoodItems() {
@@ -84,6 +94,35 @@ public class Order {
 
     public void setHouseNumber(String houseNumber) {
         this.houseNumber = houseNumber;
+    }
+
+    public void setFoodItems(Set<FoodItem> foodItems) {
+        this.foodItems = foodItems;
+    }
+
+    public void setDrinkItems(Set<DrinkItem> drinkItems) {
+        this.drinkItems = drinkItems;
+    }
+
+    public void calculatePrice() {
+
+        foodItems.forEach(foodItem -> {
+            BigDecimal priceTimesQuantity = foodItem.getFood().getPrice().multiply(BigDecimal.valueOf(foodItem.getQuantity()));
+            this.price = this.price.add(priceTimesQuantity);
+        });
+
+        drinkItems.forEach(drinkItem -> {
+            BigDecimal priceTimesQuantity = drinkItem.getDrink().getPrice().multiply(BigDecimal.valueOf(drinkItem.getQuantity()));
+            this.price = this.price.add(priceTimesQuantity);
+        });
+    }
+
+    public BigDecimal getPrice() {
+        return price;
+    }
+
+    public void setPrice(BigDecimal price) {
+        this.price = price;
     }
 
     @Override

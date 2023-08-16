@@ -7,16 +7,22 @@ import br.com.douglasbello.restaurant.repository.OrderRepository;
 import br.com.douglasbello.restaurant.services.AbstractService;
 import br.com.douglasbello.restaurant.services.OrderService;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Service;
 
 import java.time.Instant;
+import java.util.List;
 import java.util.UUID;
 
+@Service
 public class OrderServiceImpl extends AbstractService<Order> implements OrderService {
 
     private final OrderRepository repository;
 
-    public OrderServiceImpl(OrderRepository repository) {
+    private final Mapper mapper;
+
+    public OrderServiceImpl(OrderRepository repository, Mapper mapper) {
         this.repository = repository;
+        this.mapper = mapper;
     }
 
     @Override
@@ -34,7 +40,19 @@ public class OrderServiceImpl extends AbstractService<Order> implements OrderSer
 
     @Override
     public Order createNewOrder(OrderInputDTO dto) {
-        Order order = Mapper.dtoToOrder(dto);
+        Order order = mapper.dtoToOrder(dto);
         return order;
+    }
+
+    @Override
+    public List<Order> findAllSortedByLowestPrice() {
+        List<Order> data = repository.findAllByPriceAsc();
+        return data;
+    }
+
+    @Override
+    public List<Order> findAllSortedByHighestPrice() {
+        List<Order> data = repository.findAllByPriceDesc();
+        return data;
     }
 }
