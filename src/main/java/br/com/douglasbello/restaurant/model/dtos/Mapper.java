@@ -64,13 +64,13 @@ public class Mapper {
         order.setCep(dto.getCep());
         order.setHouseNumber(dto.getHouseNumber());
 
-        List<FoodItem> foodItems = dto.getFoodItemInputDTOS().stream().map(Mapper::dtoToFoodItem).collect(Collectors.toList());
+        List<FoodItem> foodItems = dto.getFoodItems().stream().map(Mapper::dtoToFoodItem).collect(Collectors.toList());
         foodItems.forEach(item -> {
             item.setOrder(order);
             order.getFoodItems().add(item);
         });
 
-        List<DrinkItem> drinkItems = dto.getDrinkItemInputDTOS().stream().map(Mapper::dtoToDrinkItem).collect(Collectors.toList());
+        List<DrinkItem> drinkItems = dto.getDrinkItems().stream().map(Mapper::dtoToDrinkItem).collect(Collectors.toList());
         drinkItems.forEach(item -> {
             item.setOrder(order);
             order.getDrinkItems().add(item);

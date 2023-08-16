@@ -12,8 +12,8 @@ public class OrderInputDTO {
     @Size(min = 8, max = 8, message = "The cep field size length must be 8 characters.")
     private String cep;
     private String houseNumber;
-    private Set<FoodItemInputDTO> foodItemInputDTOS = new HashSet<>();
-    private Set<DrinkItemInputDTO> drinkItemInputDTOS = new HashSet<>();
+    private Set<FoodItemInputDTO> foodItems = new HashSet<>();
+    private Set<DrinkItemInputDTO> drinkItems = new HashSet<>();
     private EnumPayment payment;
 
     public OrderInputDTO() {}
@@ -48,11 +48,11 @@ public class OrderInputDTO {
         this.payment = payment;
     }
 
-    public Set<FoodItemInputDTO> getFoodItemInputDTOS() {
-        return foodItemInputDTOS;
+    public Set<FoodItemInputDTO> getFoodItems() {
+        return foodItems;
     }
 
-    public Set<DrinkItemInputDTO> getDrinkItemInputDTOS() {
-        return drinkItemInputDTOS;
+    public Set<DrinkItemInputDTO> getDrinkItems() {
+        return drinkItems;
     }
 }
