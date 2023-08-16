@@ -1,5 +1,6 @@
 package br.com.douglasbello.restaurant.model.dtos;
 
+import br.com.douglasbello.restaurant.model.dtos.Drink.DrinkInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.Food.FoodInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemInputDTO;
@@ -48,6 +49,14 @@ public class Mapper {
         food.setSize(dto.getSize());
         food.setType(dto.getType());
         return food;
+    }
+
+    public static Drink dtoToDrink(DrinkInputDTO dto) {
+        Drink drink = new Drink();
+        drink.setName(dto.getName());
+        drink.setSize(dto.getSize());
+        drink.setSodaBrand(dto.getSodaBrand());
+        return drink;
     }
 
     public static Order dtoToOrder(OrderInputDTO dto) {

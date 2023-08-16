@@ -1,5 +1,6 @@
 package br.com.douglasbello.restaurant.services.impl;
 
+import br.com.douglasbello.restaurant.model.dtos.Drink.DrinkInputDTO;
 import br.com.douglasbello.restaurant.model.entities.Drink;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkSize;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkType;
@@ -35,11 +36,6 @@ public class DrinkServiceImpl extends AbstractService<Drink> implements DrinkSer
     }
 
     @Override
-    public Drink findByName(String name) {
-        return repository.findByName(name);
-    }
-
-    @Override
     public List<Drink> findAllBySize(EnumDrinkSize size) {
         return repository.findAllBySize(size);
     }
@@ -57,5 +53,18 @@ public class DrinkServiceImpl extends AbstractService<Drink> implements DrinkSer
     @Override
     public List<Drink> findAllBySodaBrand(EnumDrinkType brand) {
         return repository.findAllBySodaBrand(brand);
+    }
+
+    public void updateDataUsingDTO(Drink oldObj, DrinkInputDTO newObj) {
+        oldObj.setName(newObj.getName());
+        oldObj.setSodaBrand(newObj.getSodaBrand());
+        oldObj.setSize(newObj.getSize());
+        oldObj.setPrice(newObj.getPrice());
+    }
+
+    public Drink updateUsingDTO(UUID id, DrinkInputDTO dto) {
+        Drink oldObject = findById(id);
+        updateDataUsingDTO(oldObject, dto);
+        return getRepository().save(oldObject);
     }
 }

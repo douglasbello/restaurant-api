@@ -40,11 +40,6 @@ public class FoodServiceImpl extends AbstractService<Food> implements FoodServic
     }
 
     @Override
-    public Food findByName(String name) {
-        return repository.findByName(name);
-    }
-
-    @Override
     public List<Food> findAllByFoodType(EnumFoodType type) {
         return repository.findAllByType(type);
     }

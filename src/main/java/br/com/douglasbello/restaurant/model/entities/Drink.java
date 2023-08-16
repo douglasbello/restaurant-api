@@ -1,6 +1,7 @@
 package br.com.douglasbello.restaurant.model.entities;
 
 import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.UUID;
 
 import br.com.douglasbello.restaurant.model.entities.interfaces.DrinkPriceCalculator;
@@ -22,7 +23,7 @@ public class Drink {
     private EnumDrinkSize size;
     @Enumerated(EnumType.STRING)
     private EnumDrinkType sodaBrand;
-    private BigDecimal price;
+    private BigDecimal price = new BigDecimal(BigInteger.ZERO);
 
     @Transient
     private DrinkPriceCalculator priceCalculator;
@@ -61,7 +62,6 @@ public class Drink {
 
     public void setPrice(BigDecimal price) {
         this.price = price;
-        calculatePrice();
     }
 
     public EnumDrinkSize getSize() {
@@ -70,7 +70,7 @@ public class Drink {
 
     public void setSize(EnumDrinkSize size) {
         this.size = size;
-        calculatePrice();
+        setPriceCalculator();
     }
 
     public EnumDrinkType getSodaBrand() {
@@ -80,6 +80,7 @@ public class Drink {
     public void setSodaBrand(EnumDrinkType sodaBrand) {
         this.sodaBrand = sodaBrand;
         setPriceCalculator();
+        calculatePrice();
     }
 
     private void setPriceCalculator() {
@@ -98,7 +99,7 @@ public class Drink {
     }
 
     private void calculatePrice() {
-        this.price = priceCalculator.calculatePrice(size);
+        this.price = price.add(priceCalculator.calculatePrice(size));
     }
 
     @Override

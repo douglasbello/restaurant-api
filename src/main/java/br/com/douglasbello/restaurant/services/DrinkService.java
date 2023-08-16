@@ -7,7 +7,6 @@ import br.com.douglasbello.restaurant.model.enums.EnumDrinkType;
 import java.util.List;
 
 public interface DrinkService {
-    Drink findByName(String name);
     List<Drink> findAllBySize(EnumDrinkSize size);
     List<Drink> findAllSortedByLowestPrice();
     List<Drink> findAllSortedByHighestPrice();

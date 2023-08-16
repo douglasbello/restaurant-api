@@ -7,7 +7,6 @@ import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
 import java.util.List;
 
 public interface FoodService {
-    Food findByName(String name);
     List<Food> findAllByFoodType(EnumFoodType type);
     List<Food> findAllSortedByLowestPrice();
     List<Food> findAllSortedByHighestPrice();

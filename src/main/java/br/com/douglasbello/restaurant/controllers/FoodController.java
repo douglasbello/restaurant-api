@@ -7,6 +7,7 @@ import br.com.douglasbello.restaurant.model.entities.Food;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
 import br.com.douglasbello.restaurant.services.impl.FoodServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +41,7 @@ public class FoodController {
     public ResponseEntity<FoodResponseDTO> save(@RequestBody FoodInputDTO dto) {
         Food food = Mapper.dtoToFood(dto);
         FoodResponseDTO response = new FoodResponseDTO(service.save(food));
-        return ResponseEntity.ok(response);
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping(value = "/{id}")

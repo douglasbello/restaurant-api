@@ -38,8 +38,8 @@ public class Food {
         this.size = size;
         this.type = type;
 
-//        setPriceCalculator();
-//        calculatePrice();
+        setPriceCalculator();
+        calculatePrice();
     }
 
     public UUID getId() {

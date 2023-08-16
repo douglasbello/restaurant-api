@@ -2,6 +2,7 @@ package br.com.douglasbello.restaurant.controllers;
 
 import br.com.douglasbello.restaurant.model.entities.Admin;
 import br.com.douglasbello.restaurant.services.impl.AdminServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class AdminController {
 
     @PostMapping
     public ResponseEntity<Admin> save(@RequestBody Admin admin) {
-        return ResponseEntity.ok().body(service.save(admin));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.save(admin));
     }
 
     @DeleteMapping(value = "/{id}")
