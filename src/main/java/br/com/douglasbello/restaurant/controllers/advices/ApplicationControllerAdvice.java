@@ -23,7 +23,7 @@ public class ApplicationControllerAdvice {
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
     public ResponseEntity<ExceptionResponseDTO> handleInvalidEnumException() {
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponseDTO(HttpStatus.BAD_REQUEST.value(), "Invalid enum exception."));
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ExceptionResponseDTO(HttpStatus.BAD_REQUEST.value(), "The type in one of the fields was not the right type."));
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)

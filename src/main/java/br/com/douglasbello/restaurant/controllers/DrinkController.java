@@ -52,9 +52,9 @@ public class DrinkController {
         return ResponseEntity.ok(response);
     }
 
-    @Operation(summary = "Receive a DrinkInputDTO, converts it into a Drink and inserts into the database.", method = "POST")
+    @Operation(summary = "Receives an dto, validates it, converts it into entity and inserts in the database.", method = "POST")
     @ApiResponses(value = {
-            @ApiResponse(responseCode = "201", description = "Inserted the entity."),
+            @ApiResponse(responseCode = "201", description = "Validated successfully, converted and inserted."),
             @ApiResponse(responseCode = "400", description = "The DTO provided was not valid.")})
     @PostMapping
     public ResponseEntity<DrinkResponseDTO> save(@Valid @RequestBody DrinkInputDTO dto) {
