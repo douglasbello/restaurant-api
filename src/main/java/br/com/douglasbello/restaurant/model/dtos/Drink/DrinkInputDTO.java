@@ -5,8 +5,6 @@ import br.com.douglasbello.restaurant.model.enums.EnumDrinkType;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.math.BigDecimal;
-
 public class DrinkInputDTO {
     @NotBlank(message = "Drink name cannot be blank or null.")
     private String name;
@@ -14,16 +12,13 @@ public class DrinkInputDTO {
     private EnumDrinkSize size;
     @NotNull(message = "Soda brand cannot be null.")
     private EnumDrinkType sodaBrand;
-    @NotNull(message = "Price cannot be null.")
-    private BigDecimal price;
 
     public DrinkInputDTO() {}
 
-    public DrinkInputDTO(String name, EnumDrinkSize size, EnumDrinkType sodaBrand, BigDecimal price) {
+    public DrinkInputDTO(String name, EnumDrinkSize size, EnumDrinkType sodaBrand) {
         this.name = name;
         this.size = size;
         this.sodaBrand = sodaBrand;
-        this.price = price;
     }
 
     public String getName() {
@@ -48,13 +43,5 @@ public class DrinkInputDTO {
 
     public void setSodaBrand(EnumDrinkType sodaBrand) {
         this.sodaBrand = sodaBrand;
-    }
-
-    public BigDecimal getPrice() {
-        return price;
-    }
-
-    public void setPrice(BigDecimal price) {
-        this.price = price;
     }
 }

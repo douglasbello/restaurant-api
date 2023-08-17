@@ -59,7 +59,6 @@ public class DrinkServiceImpl extends AbstractService<Drink> implements DrinkSer
         oldObj.setName(newObj.getName());
         oldObj.setSodaBrand(newObj.getSodaBrand());
         oldObj.setSize(newObj.getSize());
-        oldObj.setPrice(newObj.getPrice());
     }
 
     public Drink updateUsingDTO(UUID id, DrinkInputDTO dto) {
