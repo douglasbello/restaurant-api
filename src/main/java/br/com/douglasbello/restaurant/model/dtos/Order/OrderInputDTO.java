@@ -3,17 +3,21 @@ package br.com.douglasbello.restaurant.model.dtos.Order;
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemDTO;
 import br.com.douglasbello.restaurant.model.enums.EnumPayment;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class OrderInputDTO {
+    @NotNull(message = "CEP cannot be null.")
     @Size(min = 8, max = 8, message = "The cep field size length must be 8 characters.")
     private String cep;
+    @NotNull(message = "House number cannot be null.")
     private String houseNumber;
     private Set<FoodItemDTO> foodItems = new HashSet<>();
     private Set<DrinkItemDTO> drinkItems = new HashSet<>();
+    @NotNull(message = "Payment cannot be null.")
     private EnumPayment payment;
 
     public OrderInputDTO() {}

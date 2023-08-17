@@ -7,6 +7,7 @@ import br.com.douglasbello.restaurant.model.entities.Drink;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkSize;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkType;
 import br.com.douglasbello.restaurant.services.impl.DrinkServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -41,15 +42,16 @@ public class DrinkController {
     }
 
     @PostMapping
-    public ResponseEntity<DrinkResponseDTO> save(@RequestBody DrinkInputDTO dto) {
+    public ResponseEntity<DrinkResponseDTO> save(@Valid @RequestBody DrinkInputDTO dto) {
         Drink data = mapper.dtoToDrink(dto);
         DrinkResponseDTO response = new DrinkResponseDTO(service.save(data));
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<DrinkResponseDTO> update(@PathVariable UUID id, @RequestBody Drink newObj) {
-        Drink drink = service.update(id, newObj);
+    public ResponseEntity<DrinkResponseDTO> update(@PathVariable UUID id, @Valid @RequestBody DrinkInputDTO newObj) {
+        Drink newObject = mapper.dtoToDrink(newObj);
+        Drink drink = service.update(id, newObject);
         DrinkResponseDTO response = new DrinkResponseDTO(drink);
         return ResponseEntity.ok(response);
     }

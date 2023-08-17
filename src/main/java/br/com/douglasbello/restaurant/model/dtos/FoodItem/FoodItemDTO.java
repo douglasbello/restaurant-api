@@ -1,12 +1,12 @@
 package br.com.douglasbello.restaurant.model.dtos.FoodItem;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.util.UUID;
 
 public class FoodItemDTO {
-    @NotBlank(message = "The drinkId field cannot be null or blank.")
+    @NotNull(message = "The drinkId field cannot be null.")
     private UUID foodId;
     @Positive(message = "Quantity field must be a positive integer.")
     private Integer quantity;

@@ -1,10 +1,10 @@
 package br.com.douglasbello.restaurant.controllers;
 
-import br.com.douglasbello.restaurant.model.dtos.Mapper;
 import br.com.douglasbello.restaurant.model.dtos.Order.OrderInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.Order.OrderResponseDTO;
 import br.com.douglasbello.restaurant.model.entities.Order;
 import br.com.douglasbello.restaurant.services.impl.OrderServiceImpl;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,7 +36,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderResponseDTO> save(@RequestBody OrderInputDTO dto) {
+    public ResponseEntity<OrderResponseDTO> save(@Valid @RequestBody OrderInputDTO dto) {
         Order obj = service.createNewOrder(dto);
         obj.calculatePrice();
         OrderResponseDTO response = new OrderResponseDTO(service.save(obj));

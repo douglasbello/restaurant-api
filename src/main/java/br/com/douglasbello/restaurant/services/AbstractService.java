@@ -1,5 +1,6 @@
 package br.com.douglasbello.restaurant.services;
 
+import br.com.douglasbello.restaurant.exceptions.EntityNotFoundException;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
@@ -16,7 +17,7 @@ public abstract class AbstractService<T> implements CommonService<T> {
 
     @Override
     public T findById(UUID id) {
-        return getRepository().findById(id).orElse(null);
+        return getRepository().findById(id).orElseThrow(() -> new EntityNotFoundException(id));
     }
 
     @Override
@@ -34,6 +35,6 @@ public abstract class AbstractService<T> implements CommonService<T> {
 
     @Override
     public void delete(UUID id) {
-        getRepository().deleteById(id);
+        getRepository().delete(getRepository().findById(id).orElseThrow(() -> new EntityNotFoundException(id)));
     }
 }

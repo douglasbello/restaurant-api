@@ -1,20 +1,20 @@
 package br.com.douglasbello.restaurant.model.dtos.Drink;
 
-import br.com.douglasbello.restaurant.model.entities.Drink;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkSize;
 import br.com.douglasbello.restaurant.model.enums.EnumDrinkType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
 public class DrinkInputDTO {
     @NotBlank(message = "Drink name cannot be blank or null.")
     private String name;
-    @NotBlank(message = "Drink size cannot be blank or null.")
+    @NotNull(message = "Size cannot be null.")
     private EnumDrinkSize size;
-    @NotBlank(message = "Drink soda brand cannot be blank or null.")
+    @NotNull(message = "Soda brand cannot be null.")
     private EnumDrinkType sodaBrand;
-    @NotBlank(message = "Price cannot be blank or null.")
+    @NotNull(message = "Price cannot be null.")
     private BigDecimal price;
 
     public DrinkInputDTO() {}

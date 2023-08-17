@@ -3,6 +3,7 @@ package br.com.douglasbello.restaurant.model.dtos.Food;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodSize;
 import br.com.douglasbello.restaurant.model.enums.EnumFoodType;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -11,9 +12,11 @@ public class FoodInputDTO {
     private String name;
     @NotBlank(message = "Description cannot be blank or null.")
     private String description;
-    @NotBlank(message = "Price cannot be blank or null.")
+    @NotNull(message = "Price cannot be null.")
     private BigDecimal price;
+    @NotNull(message = "Size cannot be null.")
     private EnumFoodSize size;
+    @NotNull(message = "Type cannot be null.")
     private EnumFoodType type;
 
     public FoodInputDTO () {}
