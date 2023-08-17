@@ -28,7 +28,7 @@ public abstract class AbstractService<T> implements CommonService<T> {
     /* the method updateData() is not implemented in this class, because each class has different attributes and different updateData implementations. */
     @Override
     public T update(UUID oldObjectId, T newObj) {
-        T oldObject = findById(oldObjectId);
+        T oldObject = getRepository().findById(oldObjectId).orElseThrow(() -> new EntityNotFoundException(oldObjectId));
         updateData(oldObject, newObj);
         return getRepository().save(oldObject);
     }
