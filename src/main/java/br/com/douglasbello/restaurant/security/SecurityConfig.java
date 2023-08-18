@@ -39,8 +39,8 @@ public class SecurityConfig {
                         .requestMatchers(new AntPathRequestMatcher("/drink/{id}", HttpMethod.DELETE.name())).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/admin/{id}", HttpMethod.PUT.name())).hasRole("ADMIN")
                         .requestMatchers(new AntPathRequestMatcher("/admin/{id}", HttpMethod.DELETE.name())).hasRole("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/admin", HttpMethod.POST.name())).hasRole("ADMIN")
-                        .requestMatchers(new AntPathRequestMatcher("/admin/sign-up", HttpMethod.POST.name())).hasRole("ADMIN")
+//                        .requestMatchers(new AntPathRequestMatcher("/admin", HttpMethod.POST.name())).hasRole("ADMIN")
+//                        .requestMatchers(new AntPathRequestMatcher("/admin/sign-up", HttpMethod.POST.name())).hasRole("ADMIN")
                         .anyRequest().permitAll()
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));

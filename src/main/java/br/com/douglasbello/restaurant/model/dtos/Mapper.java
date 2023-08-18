@@ -1,16 +1,17 @@
 package br.com.douglasbello.restaurant.model.dtos;
 
+import br.com.douglasbello.restaurant.model.dtos.AdminDTO.UsernamePasswordDTO;
 import br.com.douglasbello.restaurant.model.dtos.Drink.DrinkInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.DrinkItem.DrinkItemDTO;
 import br.com.douglasbello.restaurant.model.dtos.Food.FoodInputDTO;
 import br.com.douglasbello.restaurant.model.dtos.FoodItem.FoodItemDTO;
 import br.com.douglasbello.restaurant.model.dtos.Order.OrderInputDTO;
-import br.com.douglasbello.restaurant.model.dtos.Order.OrderResponseDTO;
 import br.com.douglasbello.restaurant.model.entities.*;
-import br.com.douglasbello.restaurant.services.impl.DrinkItemServiceImpl;
+import br.com.douglasbello.restaurant.model.enums.EnumUserRole;
 import br.com.douglasbello.restaurant.services.impl.DrinkServiceImpl;
-import br.com.douglasbello.restaurant.services.impl.FoodItemServiceImpl;
 import br.com.douglasbello.restaurant.services.impl.FoodServiceImpl;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -22,6 +23,7 @@ public class Mapper {
 
     private final DrinkServiceImpl drinkService;
     private final FoodServiceImpl foodService;
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
 
     public Mapper(DrinkServiceImpl drinkService, FoodServiceImpl foodService) {
@@ -85,5 +87,13 @@ public class Mapper {
         });
 
         return order;
+    }
+
+    public Admin usernamePasswordDtoToAdmin(UsernamePasswordDTO dto) {
+        Admin admin = new Admin();
+        admin.setUsername(dto.username());
+        admin.setPassword(passwordEncoder.encode(dto.password()));
+        admin.setRole(EnumUserRole.ADMIN);
+        return admin;
     }
 }
