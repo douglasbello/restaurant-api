@@ -10,6 +10,7 @@ import br.com.douglasbello.restaurant.services.impl.DrinkServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -52,9 +53,11 @@ public class DrinkController {
         return ResponseEntity.ok(response);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Receives an dto, validates it, converts it into entity and inserts in the database.", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Validated successfully, converted and inserted."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized."),
             @ApiResponse(responseCode = "400", description = "The DTO provided was not valid.")})
     @PostMapping
     public ResponseEntity<DrinkResponseDTO> save(@Valid @RequestBody DrinkInputDTO dto) {
@@ -63,10 +66,12 @@ public class DrinkController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Finds a entity by the id, updates it with the DTO and insert the Drink in the database again.", method = "PUT")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Entity found and updated."),
             @ApiResponse(responseCode = "400", description = "The DTO provided was not valid."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized."),
             @ApiResponse(responseCode = "404", description = "Entity with the provided id not found.")})
     @PutMapping(value = "/{id}")
     public ResponseEntity<DrinkResponseDTO> update(@PathVariable UUID id, @Valid @RequestBody DrinkInputDTO newObj) {
@@ -75,10 +80,12 @@ public class DrinkController {
         return ResponseEntity.ok(response);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Finds a entity by the id and deletes it from the database.", method = "DELETE")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Entity found and deleted."),
-            @ApiResponse(responseCode = "404", description = "Entity with the provided id not found.")})
+            @ApiResponse(responseCode = "404", description = "Entity with the provided id not found."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized.")})
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
         service.delete(id);

@@ -10,6 +10,7 @@ import br.com.douglasbello.restaurant.services.impl.FoodServiceImpl;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
@@ -44,6 +45,7 @@ public class FoodController {
     @Operation(summary = "Finds an entity by its id.", method = "GET")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Entity found successfully, returns the entity."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized."),
             @ApiResponse(responseCode = "404", description = "Entity with the provided not found.")})
     @GetMapping(value = "/{id}")
     public ResponseEntity<FoodResponseDTO> findById(@PathVariable UUID id) {
@@ -51,9 +53,11 @@ public class FoodController {
         return ResponseEntity.ok(response);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Receives an dto, validates it, converts it into entity and inserts in the database.", method = "POST")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "Entity validated and inserted successfully."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized."),
             @ApiResponse(responseCode = "400", description = "Error validating the DTO.")})
     @PostMapping
     public ResponseEntity<FoodResponseDTO> save(@Valid @RequestBody FoodInputDTO dto) {
@@ -62,10 +66,12 @@ public class FoodController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Finds entity by the id provided, validates the DTO, update the entity using the dto, and insert the entity again.", method = "PUT")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Entity found, DTO validated, entity updated and inserted successfully."),
             @ApiResponse(responseCode = "400", description = "Error validating the DTO."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized."),
             @ApiResponse(responseCode = "404", description = "Entity with the provided it not found.")})
     @PutMapping(value = "/{id}")
     public ResponseEntity<FoodResponseDTO> update(@PathVariable UUID id, @Valid @RequestBody FoodInputDTO dto) {
@@ -73,9 +79,11 @@ public class FoodController {
         return ResponseEntity.ok(response);
     }
 
+    @SecurityRequirement(name = "bearerAuth")
     @Operation(summary = "Finds entity by the id provided and deletes it from the database.", method = "DELETE")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "204", description = "Entity found and deleted successfully."),
+            @ApiResponse(responseCode = "403", description = "The token was not valid. Unauthorized."),
             @ApiResponse(responseCode = "404", description = "Entity with the provided id not found.")})
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable UUID id) {
