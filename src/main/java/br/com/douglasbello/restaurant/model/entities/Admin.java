@@ -1,18 +1,26 @@
 package br.com.douglasbello.restaurant.model.entities;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.UUID;
 
+import br.com.douglasbello.restaurant.model.enums.EnumUserRole;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity(name = "admins")
 @Table(name = "admins")
-public class Admin {
+public class Admin implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     @Column(unique = true)
     private String username;
     private String password;
+    @Enumerated(EnumType.STRING)
+    private EnumUserRole role;
 
     public Admin() {}
 
@@ -44,6 +52,42 @@ public class Admin {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public EnumUserRole getRole() {
+        return role;
+    }
+
+    public void setRole(EnumUserRole role) {
+        this.role = role;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return false;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return false;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return false;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (role == EnumUserRole.ADMIN) {
+            return List.of(new SimpleGrantedAuthority("ROLE_ADMIN"), new SimpleGrantedAuthority("ROLE_USER"));
+        }
+        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override

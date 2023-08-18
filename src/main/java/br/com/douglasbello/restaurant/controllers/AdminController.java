@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 @RestController
-@RequestMapping(value = "/admins")
+@RequestMapping(value = "/admin")
 public class AdminController {
     private final AdminServiceImpl service;
 
