@@ -13,8 +13,6 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,7 +24,6 @@ import java.util.UUID;
 @Tag(name = "Admin")
 public class AdminController {
     private final AdminServiceImpl service;
-    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
     private final Mapper mapper;
 
     @Operation(summary = "Return all the admins in the database. Requires token.", method = "GET")
